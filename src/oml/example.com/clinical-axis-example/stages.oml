@@ -1,0 +1,29 @@
+@dc:title "Imaging Triage Lifecycle Stages"
+@dc:description "SALIENT stage chain for the chest X-ray triage example."
+description <https://example.com/clinical-axis-example/stages#> as stages {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <http://clinical-axis.org/method/lifecycle#> as lifecycle
+
+    @dc:title "Stage I: Problem Definition"
+    instance stage-1-definition : lifecycle:DefinitionStage [
+        lifecycle:precedesStage stage-2-retrospective
+    ]
+
+    @dc:title "Stage II: Retrospective Validation"
+    instance stage-2-retrospective : lifecycle:RetrospectiveStage [
+        lifecycle:precedesStage stage-3-silent-trial
+    ]
+
+    @dc:title "Stage III: Silent Trial"
+    instance stage-3-silent-trial : lifecycle:SilentTrialStage [
+        lifecycle:precedesStage stage-4-pilot-trial
+    ]
+
+    @dc:title "Stage IV: Pilot Trial"
+    instance stage-4-pilot-trial : lifecycle:PilotTrialStage [
+        lifecycle:precedesStage stage-5-routine-use
+    ]
+
+    @dc:title "Stage V: Routine Use"
+    instance stage-5-routine-use : lifecycle:RoutineUseStage []
+}

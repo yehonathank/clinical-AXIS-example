@@ -1,0 +1,27 @@
+@dc:title "Imaging Triage Components"
+@dc:description "Atomic WHAT components for a chest X-ray critical-finding triage deployment."
+description <https://example.com/clinical-axis-example/components#> as components {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <http://clinical-axis.org/method/components#> as comp
+
+    @dc:title "Critical Finding Detection CNN"
+    @dc:description "Deep learning classifier that flags pneumothorax and other critical findings on chest radiographs."
+    instance cxr-critical-finding-cnn : comp:AiModel [
+        comp:hasAlgorithmType "DEEP_LEARNING"
+    ]
+
+    @dc:title "PACS Streaming Inference Pipeline"
+    @dc:description "Real-time DICOM ingest from PACS that scores studies as they arrive."
+    instance pacs-streaming-pipeline : comp:LiveInferencePipeline [
+        comp:hasPipelineMode "STREAMING_REALTIME"
+        comp:hasLatencyToleranceMs 2000
+    ]
+
+    @dc:title "Radiologist Worklist Priority Badge"
+    @dc:description "PACS worklist badge that elevates studies scored as critical."
+    instance worklist-priority-badge : comp:HciComponent []
+
+    @dc:title "STAT Read Escalation Protocol"
+    @dc:description "Protocol for STAT notification and secondary review when a critical finding is flagged."
+    instance stat-read-protocol : comp:ClinicalWorkflow []
+}

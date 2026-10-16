@@ -1,0 +1,50 @@
+@dc:title "Imaging Triage Verification Artifacts"
+@dc:description "HOW evidence for the chest X-ray triage example."
+description <https://example.com/clinical-axis-example/artifacts#> as artifacts {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <http://clinical-axis.org/method/verification#> as ver
+
+    extends <https://example.com/clinical-axis-example/components#> as comp_inst
+    extends <https://example.com/clinical-axis-example/stakeholders#> as sh_inst
+
+    @dc:title "PACS End-to-End Latency Benchmark"
+    instance pacs-latency-report : ver:LatencyThroughputReport [
+        ver:verifiesComponent comp_inst:pacs-streaming-pipeline
+        ver:satisfiesRequirement sh_inst:pacs-latency-requirement
+        ver:producedByRole sh_inst:imaging-ai-lead
+        ver:approvedByBody sh_inst:imaging-governance-committee
+        ver:hasVerificationStatus "VERIFIED"
+        ver:isGateApproved true
+        ver:hasObservedLatencyMs 1450
+    ]
+
+    @dc:title "Multi-Site Sensitivity Parity Audit"
+    instance site-parity-audit : ver:SubgroupFairnessAuditReport [
+        ver:verifiesComponent comp_inst:cxr-critical-finding-cnn
+        ver:satisfiesRequirement sh_inst:site-equity-requirement
+        ver:producedByRole sh_inst:imaging-ai-lead
+        ver:approvedByBody sh_inst:imaging-governance-committee
+        ver:hasVerificationStatus "VERIFIED"
+        ver:isGateApproved true
+        ver:hasObservedDisparityPct 2.8
+    ]
+
+    @dc:title "CNN Calibration on Held-Out Radiograph Cohort"
+    instance cnn-calibration-report : ver:ModelCalibrationReport [
+        ver:verifiesComponent comp_inst:cxr-critical-finding-cnn
+        ver:producedByRole sh_inst:imaging-ai-lead
+        ver:approvedByBody sh_inst:imaging-governance-committee
+        ver:hasVerificationStatus "VERIFIED"
+        ver:isGateApproved true
+    ]
+
+    @dc:title "STAT Escalation Failure Mode Analysis"
+    instance stat-fmea-report : ver:FailureModeAnalysisReport [
+        ver:verifiesComponent comp_inst:stat-read-protocol
+        ver:satisfiesRequirement sh_inst:stat-escalation-safety
+        ver:producedByRole sh_inst:radiology-chief
+        ver:approvedByBody sh_inst:imaging-governance-committee
+        ver:hasVerificationStatus "VERIFIED"
+        ver:isGateApproved true
+    ]
+}

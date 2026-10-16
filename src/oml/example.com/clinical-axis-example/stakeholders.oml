@@ -1,0 +1,36 @@
+@dc:title "Imaging Triage Stakeholders"
+@dc:description "WHO roles and WHY requirements for the chest X-ray triage example."
+description <https://example.com/clinical-axis-example/stakeholders#> as stakeholders {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <http://clinical-axis.org/method/governance#> as governance
+
+    extends <https://example.com/clinical-axis-example/components#> as comp_inst
+
+    @dc:title "Dr. Amina Okonkwo, Imaging AI Lead"
+    instance imaging-ai-lead : governance:TechnicalRole []
+
+    @dc:title "Dr. Leo Park, Chief of Radiology"
+    instance radiology-chief : governance:ClinicalRole []
+
+    @dc:title "Hospital Imaging AI Governance Committee"
+    instance imaging-governance-committee : governance:GovernanceBody []
+
+    @dc:title "PACS Scoring Latency Under Two Seconds"
+    instance pacs-latency-requirement : governance:PerformanceRequirement [
+        governance:mandatedByRole imaging-ai-lead
+        governance:targetsComponent comp_inst:pacs-streaming-pipeline
+    ]
+
+    @dc:title "Equitable Sensitivity Across Imaging Sites"
+    instance site-equity-requirement : governance:EquityRequirement [
+        governance:mandatedByRole imaging-governance-committee
+        governance:targetsComponent comp_inst:cxr-critical-finding-cnn
+        governance:hasMaxDisparityPct 4.0
+    ]
+
+    @dc:title "STAT Escalation Safety Requirement"
+    instance stat-escalation-safety : governance:SafetyRequirement [
+        governance:mandatedByRole radiology-chief
+        governance:targetsComponent comp_inst:stat-read-protocol
+    ]
+}

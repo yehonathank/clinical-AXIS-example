@@ -1,0 +1,33 @@
+@dc:title "Imaging Triage Assemblies"
+@dc:description "Technical system and clinical solution for chest X-ray critical-finding triage."
+description <https://example.com/clinical-axis-example/assemblies#> as assemblies {
+    uses <http://purl.org/dc/elements/1.1/> as dc
+    uses <http://clinical-axis.org/method/components#> as comp
+    uses <http://clinical-axis.org/method/lifecycle#> as lifecycle
+    uses <http://clinical-axis.org/method/verification#> as ver
+
+    extends <https://example.com/clinical-axis-example/components#> as comp_inst
+    extends <https://example.com/clinical-axis-example/stages#> as stage_inst
+    extends <https://example.com/clinical-axis-example/artifacts#> as art_inst
+
+    @dc:title "Chest X-Ray Critical Finding Technical Subsystem"
+    @dc:description "CNN scoring engine fed by the PACS streaming pipeline."
+    instance cxr-triage-technical-system : comp:TechnicalSystem [
+        comp:aggregatesComponent comp_inst:cxr-critical-finding-cnn
+        comp:aggregatesComponent comp_inst:pacs-streaming-pipeline
+        lifecycle:evaluatedAtStage stage_inst:stage-3-silent-trial
+        ver:requiresArtifact art_inst:pacs-latency-report
+        ver:requiresArtifact art_inst:site-parity-audit
+        ver:requiresArtifact art_inst:cnn-calibration-report
+    ]
+
+    @dc:title "ED Chest X-Ray Triage Clinical Solution"
+    @dc:description "End-to-end triage solution combining the technical subsystem, worklist badge, and STAT escalation protocol."
+    instance ed-cxr-triage-solution : comp:ClinicalSolution [
+        comp:incorporatesTechnicalSystem cxr-triage-technical-system
+        comp:aggregatesComponent comp_inst:worklist-priority-badge
+        comp:aggregatesComponent comp_inst:stat-read-protocol
+        lifecycle:evaluatedAtStage stage_inst:stage-4-pilot-trial
+        ver:requiresArtifact art_inst:stat-fmea-report
+    ]
+}

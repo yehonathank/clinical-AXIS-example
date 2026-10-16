@@ -1,0 +1,11 @@
+description bundle <https://example.com/clinical-axis-example/bundle#> as example_bundle {
+    // Descriptions already use method vocabularies directly. Avoiding the
+    // vocabulary bundle here matches the Clinical AXIS dogfood pattern and
+    // sidesteps sibling-disjoint closure treating ApprovedVerificationArtifact
+    // as disjoint from report subtypes.
+    includes <https://example.com/clinical-axis-example/stages#>
+    includes <https://example.com/clinical-axis-example/components#>
+    includes <https://example.com/clinical-axis-example/stakeholders#>
+    includes <https://example.com/clinical-axis-example/artifacts#>
+    includes <https://example.com/clinical-axis-example/assemblies#>
+}

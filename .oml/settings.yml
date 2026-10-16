@@ -1,0 +1,13 @@
+oml-code:
+  schemaVersion: 1
+
+project:
+  name: clinical-axis-example
+  version: 0.1.0
+  title: Clinical AXIS Example
+  description: "Independent consumer of the packaged Clinical AXIS methodology — chest X-ray triage deployment."
+
+sources: [ src ]
+
+dependencies:
+  axis: "0.1.0"
